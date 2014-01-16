@@ -1,0 +1,40 @@
+﻿Build started 1/15/2014 11:04:39 PM.
+     1>Project "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\HelloCpp.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\cocos2dx" /I"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\cocos2dx\include" /I"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\cocos2dx\kazmath\include" /I"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\cocos2dx\platform\win32" /I"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\cocos2dx\platform\third_party\win32" /I"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\cocos2dx\platform\third_party\win32\OGLES" /I"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\external" /I"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\external\chipmunk\include\chipmunk" /I"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\CocosDenshion\include" /I"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\extensions" /I..\Classes /I.. /ZI /nologo /W3 /WX- /MP /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USE_MATH_DEFINES /D GL_GLEXT_PROTOTYPES /D CC_ENABLE_CHIPMUNK_INTEGRATION=1 /D COCOS2D_DEBUG=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc110.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\Game.cpp
+         Game.cpp
+     1>c:\users\gramp_000\desktop\cocos2d-x\projects\hex\classes\game.cpp(38): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gramp_000\desktop\cocos2d-x\projects\hex\classes\game.cpp(38): warning C4996: 'cocos2d::ccDrawSolidRect': was declared deprecated
+                 c:\users\gramp_000\desktop\cocos2d-x\cocos2dx\include\ccdeprecated.h(1000) : see declaration of 'cocos2d::ccDrawSolidRect'
+     1>c:\users\gramp_000\desktop\cocos2d-x\projects\hex\classes\game.cpp(73): warning C4305: 'argument' : truncation from 'double' to 'const float'
+     1>c:\users\gramp_000\desktop\cocos2d-x\projects\hex\classes\game.cpp(123): warning C4305: 'argument' : truncation from 'double' to 'const float'
+     1>c:\users\gramp_000\desktop\cocos2d-x\projects\hex\classes\game.cpp(124): warning C4305: 'argument' : truncation from 'double' to 'const float'
+     1>c:\users\gramp_000\desktop\cocos2d-x\projects\hex\classes\game.cpp(131): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gramp_000\desktop\cocos2d-x\projects\hex\classes\game.cpp(181): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gramp_000\desktop\cocos2d-x\projects\hex\classes\game.cpp(191): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gramp_000\desktop\cocos2d-x\projects\hex\classes\game.cpp(194): warning C4018: '<' : signed/unsigned mismatch
+       PreLinkEvent:
+         if not exist "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\" mkdir "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\"
+         xcopy /Y /Q "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\..\..\..\external\libwebsockets\win32\lib\*.*" "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\"
+         :VCEnd
+         2 File(s) copied
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\HelloCpp.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\\" /LIBPATH:"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\\" libExtensions.lib libcocos2d.lib libCocosDenshion.lib libBox2d.lib libchipmunk.lib libcurl_imp.lib websockets.lib opengl32.lib glew32.lib libzlib.lib libpng.lib libjpeg.lib libtiff.lib libwebp.lib libiconv.lib glfw3.lib freetype250.lib winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\HelloCpp.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\HelloCpp.lib" /MACHINE:X86 /SAFESEH Debug.win32\game.res
+         Debug.win32\AppDelegate.obj
+         Debug.win32\Decal.obj
+         Debug.win32\Game.obj
+         Debug.win32\simplexnoise.obj
+         Debug.win32\simplextextures.obj
+         Debug.win32\ATile.obj
+         Debug.win32\main.obj
+         "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\libcocos2d.lib"
+         "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\libCocosDenshion.lib"
+         "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\libExtensions.lib"
+         "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\libBox2D.lib"
+         "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\libchipmunk.lib"
+         HelloCpp.vcxproj -> C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\Debug.win32\HelloCpp.exe
+     1>Done Building Project "C:\Users\gramp_000\Desktop\cocos2d-x\projects\hex\proj.win32\HelloCpp.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:23.50
