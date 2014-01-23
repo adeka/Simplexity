@@ -1,14 +1,23 @@
 #include "Game.h"
 //#include "ATile.h"
+bool ATile::contains(Sprite * s){
+	Point p1 = Point( sprite->getPositionX(),sprite->getPositionY());
+	Point p2 = Point( s->getPositionX(),s->getPositionY()  - 110);
+	return p1.getDistance(p2) < 90;
+}
 
+bool ATile::containsPoint(Point p, int offset){
+	Point p1 = Point( sprite->getPositionX(),sprite->getPositionY());
+	Point p2 = Point( p.x, p.y - offset);
+	return p1.getDistance(p2) < 100;
+}
 
 ATile::ATile(int type,  Game * g, int col, int row, int index){
 		ATile::type = type;
 		ATile::g = g;
 		x = col;
 		y = row;
-		
-		
+		decal = new Decal();
 		switch( type ) {
 		case types::GRASS:
 			sprite = Sprite::create("tile.png");

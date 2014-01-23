@@ -14,12 +14,15 @@ public:
 	int x;
 	int y;
 	bool visible;
+	float windmag;
+	float freq;
 	Point position;
 
+	class ATile * tile;
 	enum types {DEFAULT, PALM, DEBRIS, PINE, TREE1, TREE2, TREE3, GRASS, GOLD, ROCK, TALLROCK, WHEAT, POPPY};
 	class Game * g;
 
-	Decal(int type, Game * g, int index, float height, class ATile * tile);
+	Decal(int type, Game * g, int index, float height, ATile * tile);
 	Decal();
 	void setPosition(Point p);
 	cocos2d::Sprite * sprite;

@@ -133,20 +133,23 @@ bool Game::init()
 		else{
 			tile->setPosition(Point((col*tile->width)+ offset,(row*tile->height/6) + height));
 		}
-		Decal * decal = new Decal();
-		if(terrain > 70){
-			decal = new Decal(Decal::types::TALLROCK, this, i, treenoise, tile);
-		}
-		else if(terrain > 62){
-			decal = new Decal(Decal::types::ROCK, this, i, treenoise, tile);
-		}
-		else{
+		
+		if(tile->type != ATile::types::WATER){
+			Decal * decal = new Decal();
+			if(terrain > 70){
+				decal = new Decal(Decal::types::TALLROCK, this, i, treenoise, tile);
+			}
+			else if(terrain > 62){
+				decal = new Decal(Decal::types::ROCK, this, i, treenoise, tile);
+			}
+		
+
 			//CCLOG(to_string(height).c_str());
-			auto height2 = 50 - height;
-			if(height2 > 0) tile->sprite->setColor(Color3B(c.r - height2,c.g - height2,c.b - height2));
-			if(treenoise > 3 && tile->type != ATile::types::WATER){
+			//auto height2 = 50 - height;
+			//if(height2 > 0) tile->sprite->setColor(Color3B(c.r - height2,c.g - height2,c.b - height2));
+	
 			//Decal * decal;
-			if(treenoise > 12){
+			else if(treenoise > 12){
 				decal = new Decal(Decal::types::POPPY, this, i, treenoise, tile);
 			}
 			else if(treenoise > 9){
@@ -169,45 +172,122 @@ bool Game::init()
 			else if(treenoise > 2){
 				decal = new Decal(Decal::types::GRASS, this, i, treenoise, tile);
 			}
-		}
-		//decal = new Decal(1, this, i, treenoise, tile);
-		if(decal->type != Decal::types::DEFAULT){
-			decalList.push_back(decal);
-		}
+		
+			//decal = new Decal(1, this, i, treenoise, tile);
+			if(decal->type != Decal::types::DEFAULT){
+				decalList.push_back(decal);
+				tile->decal = decal;
+			}
 		}
 	}
 	//this->setScale(.6f);
 	this->scheduleUpdate();
-	this->setScale(.8);
+	//this->setScale(.5);
 	// this->addTouchListener(); 
 	//this->setTouchMode(Touch::DispatchMode::ONE_BY_ONE);
 	ready = true;
-    return true;
+    counter = 0;
+
+	ATile * t = tileList[100];
+	player = new Unit(this, t->sprite->getZOrder(), t);
+
+	return true;
 }
 
 void Game::update(float dt){
+	counter+=.01;
+
 
 	//this->setColor(Color3B(255,1,255));
 	for(int i = 0; i < decalList.size(); i++){
 		decalList[i]->update();
+		Color3B c = Color3B(255,255,255);
+		float height = scaled_octave_noise_2d( 2, .8, .1, -90 , 120, decalList[i]->tile->x + counter,decalList[i]->tile->y + counter);
+		auto height2 = 130 - height;
+		if(height2 > 0){
+			decalList[i]->sprite->setColor(Color3B(c.r - height2,c.g - height2,c.b - height2));
+			decalList[i]->windmag = height2/30.0;
+			decalList[i]->freq = 50.0 + (height/50.0);
+		}
+		//decalList[i]->setPosition(Point(0,0));
 	}
 	for(int i = 0; i < tileList.size(); i++){
 		tileList[i]->update();
+		Color3B c = Color3B(255,255,255);
+		float height = scaled_octave_noise_2d( 2, .8, .1, -90 , 120, tileList[i]->x + counter,tileList[i]->y + counter);
+		auto height2 = 100 - height;
+		if(height2 > 0) tileList[i]->sprite->setColor(Color3B(c.r - height2,c.g - height2,c.b - height2));
+		if(tileList[i]->contains(player->sprite)){
+			player->sprite->setZOrder(tileList[i]->sprite->getZOrder() + 1);
+			//player->sprite->setColor(Color3B(c.r - height2,c.g - height2,c.b - height2));
+		}
 	}
+	/*
+	Color3B c = Color3B(255,255,255);
+	float height = scaled_octave_noise_2d( 2, .8, .1, -90 , 120, player->sprite->getPositionX()/ 64.0 + counter,player->sprite->getPositionY()/64.0 + counter);
+	auto height2 = 100 - height;
+	player->sprite->setColor(Color3B(c.r - height2,c.g - height2,c.b - height2));
+	W
+	if (GetAsyncKeyState(87)) {
+		//CCLOG("W");
+		Point p = Point(player->sprite->getPositionX(),player->sprite->getPositionY()+12);
+		for(int i = 0; i < tileList.size(); i++){
+			//ATile * t = tileList[i];
+			if(tileList[i]->containsPoint(p, -40) && tileList[i]->type != ATile::types::WATER && tileList[i]->decal->type == Decal::types::DEFAULT){
+				player->sprite->setPositionY(p.y);
+			}
+		}
+    }
+	
+    if (GetAsyncKeyState(65)) {
+		//CCLOG("A");
+		Point p = Point(player->sprite->getPositionX()-12,player->sprite->getPositionY());
+		for(int i = 0; i < tileList.size(); i++){
+			//ATile * t = tileList[i];
+			if(tileList[i]->containsPoint(p, 150) && tileList[i]->type != ATile::types::WATER && tileList[i]->decal->type == Decal::types::DEFAULT){
+				player->sprite->setPositionX(p.x);
+			}
+		}
+    }
+    if (GetAsyncKeyState(83)) {
+		//CCLOG("S");
+		Point p = Point(player->sprite->getPositionX(),player->sprite->getPositionY()-12);
+		for(int i = 0; i < tileList.size(); i++){
+			//ATile * t = tileList[i];
+			if(tileList[i]->containsPoint(p, 80) && tileList[i]->type != ATile::types::WATER && tileList[i]->decal->type == Decal::types::DEFAULT){
+				player->sprite->setPositionY(p.y);
+			}
+		}
+    }
+    if (GetAsyncKeyState(68)) {
+		//CCLOG("D");
+		Point p = Point(player->sprite->getPositionX() + 12,player->sprite->getPositionY());
+		for(int i = 0; i < tileList.size(); i++){
+			//ATile * t = tileList[i];
+			if(tileList[i]->containsPoint(p, 80) && tileList[i]->type != ATile::types::WATER && tileList[i]->decal->type == Decal::types::DEFAULT){
+				player->sprite->setPositionX(p.x);
+			}
+		}
+    }
+	*/
 	//CCLOG("YEA");
 	POINT p; 
 	GetCursorPos(&p);
-	Point cp = Point(p.x - this->getPositionX(), Director::getInstance()->getVisibleSize().height - p.y - this->getPositionY() + tileList[0]->sprite->getBoundingBox().size.height/2);
+	Point cp = Point(p.x - this->getPositionX(), 
+		Director::getInstance()->getVisibleSize().height 
+		- p.y - this->getPositionY() 
+		+ tileList[0]->sprite->getBoundingBox().size.height/2.0);
 	
 	if((GetKeyState(WM_MOUSEWHEEL) & 0x100) != 0){
 		//CCLOG("EAAA");
 		
 	}
 	if((GetKeyState(VK_LBUTTON) & 0x100) != 0){
-		this->setScale(this->getScale()-.001);
+		//this->setScale(this->getScale()-.001);
 		//CCLOG("DOWN");
-		/*
-		for(int i = 0; i < tileList.size(); i++){
+		
+	}
+	for(int i = 0; i < tileList.size(); i++){
 			if(tileList[i]->sprite->getBoundingBox().containsPoint(cp)){
 				//tileList[i]->setColor(ccc3(255,0,0));
 				//Sprite* water = Sprite::create("water.png");
@@ -215,17 +295,15 @@ void Game::update(float dt){
 				//water->setPosition(tileList[i]->getPosition());
 				//tileList[i]->removeFromParentAndCleanup(true);
 				//tileList[i] = water;
-				tileList[i]->sprite->setPositionY(tileList[i]->sprite->getPositionY() - 1);
-				Color3B c = tileList[i]->sprite->getColor();
-				tileList[i]->sprite->setColor(Color3B(c.r - 1,c.g - 1,c.b - 1));
+				//tileList[i]->sprite->setPositionY(tileList[i]->sprite->getPositionY() - 1);
+				//Color3B c = tileList[i]->sprite->getColor();
+				tileList[i]->sprite->setColor(Color3B(50,50,255));
 				//removals.push_back(tileList[i]);
 				//tileList[i]->removeFromParentAndCleanup(true);
 				//tileList.erase(tileList.begin()+i);
 				break;
 			}
 		}
-		*/
-	}
 	//auto s = Sprite::create("hex.png");
 	//this->addChild(s);
 	//s->setPosition(Point(p.x, Director::getInstance()->getVisibleSize().height - p.y));

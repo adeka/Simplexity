@@ -16,8 +16,11 @@ public:
 	int y;
 	bool visible;
 	bool odd;
-	Point position;
 
+	class Decal * decal;
+	Point position;
+	bool contains(Sprite * s);
+	bool containsPoint(Point p, int offset);
 	class Game * g;
 
 	ATile(int type, Game * g, int col, int row, int index);
